@@ -93,13 +93,12 @@ fun Home(navController: NavHostController) {
                     Row {
                         it.forEach {
                             DogCard(it, Modifier.weight(1f)) { puppyId ->
-                                navController.navigate("puppy/${puppyId}")
+                                navController.navigate("puppy/$puppyId")
                             }
                         }
                     }
                 }
             }
         }
-
     }
 }
