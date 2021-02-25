@@ -59,8 +59,14 @@ class MainActivity : AppCompatActivity() {
                     composable("home") { Home(navController) }
                     composable(
                         "puppy/{puppyId}",
-                        arguments = listOf(navArgument("puppyId") { type = NavType.StringType })
-                    ) { backStackEntry -> Detail(backStackEntry.arguments?.getString("puppyId")) }
+                        arguments = listOf(navArgument("puppyId") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val puppyId = backStackEntry.arguments?.getInt("puppyId")
+                        val puppy = Puppy.getPuppyFromId(puppyId)
+                        Detail(puppy) {
+                            navController.navigate("home")
+                        }
+                    }
                 }
             }
         }
@@ -83,10 +89,10 @@ fun Home(navController: NavHostController) {
                     fontWeight = FontWeight.Bold,
                     fontSize = 26.sp
                 ),
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(vertical = 4.dp, horizontal = 12.dp)
             )
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(8.dp))
 
             LazyColumn(modifier = Modifier.padding(horizontal = 4.dp)) {
                 items(puppies) {

@@ -23,7 +23,10 @@ data class Puppy(
     val name: String,
     @DrawableRes val drawable: Int,
     val sex: String = "male",
-    val age: Int = 0
+    val age: Int = 3,
+    val description: String = "Young labrador that is very friendly. He loves to play in the garden.",
+    val tags: List<String> = listOf("Friendly", "Sweet", "Ball lover"),
+    var isFavoritePuppy: Boolean = false
 ) : Serializable {
     companion object {
         val basePuppies = arrayOf(
@@ -40,5 +43,7 @@ data class Puppy(
             Puppy(10, "Cookie", R.drawable.dog5),
             Puppy(11, "Cookie", R.drawable.dog6)
         )
+
+        fun getPuppyFromId(id: Int?) = basePuppies.first { it.id == id }
     }
 }
